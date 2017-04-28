@@ -55,28 +55,21 @@ public class UniArvoreImpl<T> implements UniArvore<T> {
 			for (UniNode<T> filho : node.getFilhos()) {
 				
 				if(filho.isLeaf()) saida += "\t" + idx + ".";
-				
+
 				Method getId = null;
 				Object id = null;
 				
 				try {
 					getId  = filho.getConteudo().getClass().getMethod("getId");
 					id = getId.invoke(node.getConteudo());
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (SecurityException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
+				} catch (NoSuchMethodException | SecurityException |IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					e.printStackTrace();
 				}
 				
 				saida += id + "." + filho.getConteudo().toString() + "\n";
 				
 				saida += printNodes(filho, idx);
+
 			}
 		}
 		
