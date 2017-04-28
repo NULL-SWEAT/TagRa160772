@@ -75,5 +75,39 @@ public class UniArvoreImpl<T> implements UniArvore<T> {
 		
 		return saida;
 	}
+	
+//-----------------------------------------WIP---------------------------------	
+	public void printV2(UniNode<T> node) {
+		String output = "";
+		
+		if(node == null) return;
+		
+		Method getId = null, getNome = null;
+		Object id = null, nome = null;
+		
+		try {
+			getId  = node.getConteudo().getClass().getMethod("getId");
+			id = getId.invoke(node.getConteudo());
+			getNome  = node.getConteudo().getClass().getMethod("getNome");
+			nome = getNome.invoke(node.getConteudo());
+		} catch (NoSuchMethodException | SecurityException |IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 
+	public String appendTab(UniNode<T> node) {
+		
+		UniNode<T> aux = node;
+		String str = "";
+		
+		while(aux.getPai() != null) {
+			aux = node.getPai();
+			str += "\t";
+		}
+		str += "\t";
+		return str;
+		
+	}
 }
