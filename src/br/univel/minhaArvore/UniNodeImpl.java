@@ -17,6 +17,11 @@ public class UniNodeImpl<T> implements UniNode<T> {
 	public UniNode<T> getPai() {
 		return pai;
 	}
+	
+	@Override
+	public boolean hasPai() {
+		return (pai != null);
+	}
 
 	@Override
 	public void setPai(UniNode<T> pai) {

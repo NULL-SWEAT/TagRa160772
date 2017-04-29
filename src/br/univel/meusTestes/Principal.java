@@ -77,7 +77,8 @@ public class Principal {
 		BigDecimal somaFilhos = somarFilhos(planoContas.getRaiz());
 		System.out.println("\nSoma das Contas: "+ somaFilhos + "\n");
 		
-		planoContas.mostrarTodosConsole();
+//		planoContas.mostrarTodosConsole();
+		System.out.println(planoContas.printV2(planoContas.getRaiz()));
 		
 	}
 	

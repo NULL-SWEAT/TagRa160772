@@ -6,6 +6,8 @@ public interface UniNode<T> {
 	
 	public UniNode<T> getPai();
 	
+	public boolean hasPai();
+	
 	public void setPai(UniNode<T> pai);
 	
 	public List<UniNode<T>> getFilhos();

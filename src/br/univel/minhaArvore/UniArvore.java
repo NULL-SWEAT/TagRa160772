@@ -9,4 +9,6 @@ public interface UniArvore<T> {
 	
 	public String printNodes(UniNode<T> node, Object idx);
 	
+	public String printV2(UniNode<T> node);
+	
 }

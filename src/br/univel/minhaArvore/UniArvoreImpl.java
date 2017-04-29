@@ -76,37 +76,83 @@ public class UniArvoreImpl<T> implements UniArvore<T> {
 		return saida;
 	}
 	
-//-----------------------------------------WIP---------------------------------	
-	public void printV2(UniNode<T> node) {
+//-----------------------------------------WIP---------------------------------
+	@Override
+	public String printV2(UniNode<T> node) {
 		String output = "";
 		
-		if(node == null) return;
+//		if(node == null) return;
 		
 		Method getId = null, getNome = null;
-		Object id = null, nome = null;
 		
 		try {
 			getId  = node.getConteudo().getClass().getMethod("getId");
-			id = getId.invoke(node.getConteudo());
 			getNome  = node.getConteudo().getClass().getMethod("getNome");
-			nome = getNome.invoke(node.getConteudo());
-		} catch (NoSuchMethodException | SecurityException |IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (NoSuchMethodException | SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 		
+		printRec(node, getId, getNome);
 		
+		return output;
+	}
+	
+	public String printRec(UniNode<T> node, Method getId, Method getNome) {
+		String output = "";
+		Object id = null, nome = null;
+		
+		try {
+			id = getId.invoke(node.getConteudo());
+			nome = getNome.invoke(node.getConteudo());
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		if(!node.isLeaf()) {
+		for (UniNode<T> n : node.getFilhos()) {
+			
+			output += appendTab(node);
+			output += appendIdx(node, getId);
+			output += id + "\t" + nome + "\n";
+			
+			printRec(n, getId, getNome);
+			
+		}
+		}
+		return output;
 	}
 
+	
+	
 	public String appendTab(UniNode<T> node) {
 		
 		UniNode<T> aux = node;
 		String str = "";
 		
-		while(aux.getPai() != null) {
+		while(aux.hasPai()) {
 			aux = node.getPai();
 			str += "\t";
 		}
-		str += "\t";
+		return str;
+		
+	}
+	
+	public String appendIdx(UniNode<T> node, Method getId) {
+		
+		UniNode<T> aux = node;
+		String str = "";
+		Object id = null;
+		
+		while(aux.hasPai()) {
+			aux = node.getPai();
+			
+			try {
+				id = getId.invoke(aux.getConteudo());
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			
+			str += id + "." + str;
+		}
 		return str;
 		
 	}
