@@ -24,6 +24,9 @@ public class Principal {
 		Conta teste = new Conta(1, "teste" , new BigDecimal(50));
 		UniNode<Conta> noTeste = new UniNodeImpl<>(teste);
 		noAluguel.addFilho(noTeste);
+		Conta teste1 = new Conta(2, "teste1" , new BigDecimal(50));
+		UniNode<Conta> noTeste1 = new UniNodeImpl<>(teste1);
+		noAluguel.addFilho(noTeste1);
 		
 		Conta contaIntTel = new Conta(3, "Internet/telefone", new BigDecimal(1));
 		UniNode<Conta> noIntTel = new UniNodeImpl<>(contaIntTel);
@@ -60,8 +63,28 @@ public class Principal {
 		Conta servLimp = new Conta(1, "Servicos de Limpeza", new BigDecimal(1));
 		UniNode<Conta> noServLimp= new UniNodeImpl<>(servLimp);
 		
-		Conta servMan = new Conta(2, "Encargos", new BigDecimal(1));
+		Conta servMan = new Conta(2, "Servicos de Manutencao", new BigDecimal(1));
 		UniNode<Conta> noServMan = new UniNodeImpl<>(servMan);
+		
+		Conta shwb = new Conta(1, "SESHOLLOWATERBOYZ" , new BigDecimal(50));
+		UniNode<Conta> noShwb = new UniNodeImpl<>(shwb);
+		noServMan.addFilho(noShwb);
+		Conta g59 = new Conta(2, "G59 $uicide" , new BigDecimal(50));
+		UniNode<Conta> noG59 = new UniNodeImpl<>(g59);
+		noServMan.addFilho(noG59);
+		
+		Conta bones = new Conta(1, "Bones" , new BigDecimal("6.66"));
+		UniNode<Conta> noBones = new UniNodeImpl<>(bones);
+		noShwb.addFilho(noBones);
+		Conta chris = new Conta(2, "Chris Travis" , new BigDecimal("1.23"));
+		UniNode<Conta> noChris = new UniNodeImpl<>(chris);
+		noShwb.addFilho(noChris);
+		Conta wulf = new Conta(3, "Xavier Wulf" , new BigDecimal(125));
+		UniNode<Conta> noWulf = new UniNodeImpl<>(wulf);
+		noShwb.addFilho(noWulf);
+		Conta eddy = new Conta(4, "Eddy Baker" , new BigDecimal(420));
+		UniNode<Conta> noEddy = new UniNodeImpl<>(eddy);
+		noShwb.addFilho(noEddy);
 		
 		Conta manLimp = new Conta(3, "Manutencao e Limpeza" , new BigDecimal(0));
 		UniNode<Conta> noManLimp = new UniNodeImpl<>(manLimp);
@@ -77,8 +100,11 @@ public class Principal {
 		BigDecimal somaFilhos = somarFilhos(planoContas.getRaiz());
 		System.out.println("\nSoma das Contas: "+ somaFilhos + "\n");
 		
+		System.out.println(noManLimp.getPai().getConteudo().toString());
+		
 //		planoContas.mostrarTodosConsole();
-		System.out.println(planoContas.printV2(planoContas.getRaiz()));
+		System.out.println(planoContas.printRec(planoContas.getRaiz()));
+		
 		
 	}
 	

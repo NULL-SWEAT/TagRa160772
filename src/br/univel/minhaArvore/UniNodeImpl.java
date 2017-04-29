@@ -15,7 +15,7 @@ public class UniNodeImpl<T> implements UniNode<T> {
 
 	@Override
 	public UniNode<T> getPai() {
-		return pai;
+		return this.pai;
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class UniNodeImpl<T> implements UniNode<T> {
 		if(this.filhos == null) {
 			this.filhos = new ArrayList<UniNode<T>>();
 		}
-		node.setPai(node);
+		node.setPai(this);
 		this.filhos.add(node);
 	}
 
