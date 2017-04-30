@@ -63,10 +63,10 @@ public class Principal {
 		Conta servLimp = new Conta(1, "Servicos de Limpeza", new BigDecimal(1));
 		UniNode<Conta> noServLimp= new UniNodeImpl<>(servLimp);
 		
-		Conta servMan = new Conta(2, "Servicos de Manutencao", new BigDecimal(1));
+		Conta servMan = new Conta(2, "Servicos de Manutencao", new BigDecimal(0));
 		UniNode<Conta> noServMan = new UniNodeImpl<>(servMan);
 		
-		Conta shwb = new Conta(1, "SESHOLLOWATERBOYZ" , new BigDecimal(50));
+		Conta shwb = new Conta(1, "SESHOLLOWATERBOYZ" , new BigDecimal(0));
 		UniNode<Conta> noShwb = new UniNodeImpl<>(shwb);
 		noServMan.addFilho(noShwb);
 		Conta g59 = new Conta(2, "G59 $uicide" , new BigDecimal(50));
@@ -97,10 +97,9 @@ public class Principal {
 		
 		UniArvore<Conta> planoContas = new UniArvoreImpl(noDespOper);
 		
-		BigDecimal somaFilhos = somarFilhos(planoContas.getRaiz());
-		System.out.println("\nSoma das Contas: "+ somaFilhos + "\n");
 		
-		System.out.println(noManLimp.getPai().getConteudo().toString());
+		System.out.println("Soma de todos os filhos: " + somarFilhos(planoContas.getRaiz()) + "\n");
+		
 		
 //		planoContas.mostrarTodosConsole();
 		System.out.println(planoContas.printRec(planoContas.getRaiz()));
@@ -108,19 +107,16 @@ public class Principal {
 		
 	}
 	
-	
+	//Adiciona a soma dos valores dos filhos ao pai e retorna a soma de todos os nós.
 	public BigDecimal somarFilhos(UniNode<Conta> node) {
-
-		BigDecimal soma = node.getConteudo().getValor();
-		
 		if(!node.isLeaf()) {
-			for (UniNode<Conta> filho : node.getFilhos()) {
-				soma = soma.add(somarFilhos(filho));
+			for (UniNode<Conta> n : node.getFilhos()) {
+				node.getConteudo().setValor(node.getConteudo().getValor().add(somarFilhos(n)));
 			}
 		}
-		return soma;
+		return node.getConteudo().getValor();
 	}
-
+	
 	
 	public static void main(String[] args) {
 	
